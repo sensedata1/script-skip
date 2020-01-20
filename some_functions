@@ -1,0 +1,20 @@
+#!/bin/bash
+
+func1() {
+	echo "Function 1 run"
+}
+
+func2() {
+        echo "Function 2 run"
+}
+
+
+func3() {
+        echo "Function 3 run"
+}
+
+
+func4() {
+        echo "Function 4 run"
+}
+
