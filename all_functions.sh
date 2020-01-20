@@ -25,7 +25,7 @@ do
    then
 	 "$i"
    else
-	   echo "$i aborted"
+	  echo "$i aborted"
    fi
 done
 
