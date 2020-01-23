@@ -1,0 +1,27 @@
+if "description" contains P1 and "priority" = Critical and "some_field" does not contain CLOSED and "EVENT_ID" is not in $DATA_FILE
+then
+	jq | . > "$NEW_ALERT_FILE"
+
+	DATA_FILE=alert_log.txt
+	NEW_ALERT_FILE=new_alert.txt
+	TEMP_FILE=tempfile.txt
+
+if $DATA_FILE changes then play wav
+
+cat $NEW_ALERT $DATA_FILE > $TEMP_FILE; mv $TEMP_FILE $DATA_FILE
+
+Powershell:
+
+Watcher_ps1 
+
+
+
+
+
+
+API queries meeting the jq filter should only be returned if they are critical P1 alerts and not CLOSED notifications. 
+
+They are then appended to the data.json output file
+so new alerts are prepended***
+
+cat file1.txt file2.txt > file3.txt; mv file3.txt file2.txt
