@@ -1,0 +1,28 @@
+$File = "C:\temp\log.txt"
+$Action = 'Write-Output "The watched file was changed"'
+$global:FileChanged = $false
+
+function Wait-FileChange {
+    param(
+        [string]$File,
+        [string]$Action
+    )
+    $FilePath = Split-Path $File -Parent
+    $FileName = Split-Path $File -Leaf
+    $ScriptBlock = [scriptblock]::Create($Action)
+
+    $Watcher = New-Object IO.FileSystemWatcher $FilePath, $FileName -Property @{ 
+        IncludeSubdirectories = $false
+        EnableRaisingEvents = $true
+    }
+    $onChange = Register-ObjectEvent $Watcher Changed -Action {$global:FileChanged = $true}
+
+    while ($global:FileChanged -eq $false){
+        Start-Sleep -Milliseconds 100
+    }
+
+    & $ScriptBlock 
+    Unregister-Event -SubscriptionId $onChange.Id
+}
+
+Wait-FileChange -File $File -Action $Action
