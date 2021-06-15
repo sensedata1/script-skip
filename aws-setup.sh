@@ -5,7 +5,7 @@
 
 curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
 sudo installer -pkg AWSCLIV2.pkg -target /
-
+npm install -g aws-cdk
 brew tap aws/tap
 brew install aws-sam-cli
 
